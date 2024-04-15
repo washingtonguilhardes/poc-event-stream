@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Stream Example</title>
+  </head>
+  <body>
+    <div id="messages"></div>
+
+    <script>
+      // Função para exibir mensagens recebidas
+      function displayMessage(message) {
+        const messagesDiv = document.getElementById("messages");
+        messagesDiv.innerHTML = "";
+        const messageElement = document.createElement("div");
+        messageElement.innerHTML = message.split("\n").join("<br />");
+        messagesDiv.appendChild(messageElement);
+      }
+
+      // Conectar-se ao servidor SSE
+      const eventSource = new EventSource("/events");
+
+      // Manipulador de evento para mensagens recebidas
+      eventSource.onmessage = function (event) {
+        // Parse JSON data
+        const data = JSON.parse(event.data);
+        // Exibir a mensagem
+        displayMessage(data.message);
+      };
+    </script>
+  </body>
+</html>
