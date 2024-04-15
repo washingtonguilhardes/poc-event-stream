@@ -48,7 +48,7 @@ app.get("/events", async (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  const html = readFileSync("index.html", "utf8");
+  const html = readFileSync("../index.html", "utf8");
   res.setHeader("Content-Type", "text/html");
   res.send(html);
 });
